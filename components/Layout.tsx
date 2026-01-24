@@ -5,7 +5,7 @@ import NotificationCenter from './NotificationCenter';
 import { signOut } from 'firebase/auth';
 import { auth } from '../services/firebase';
 import { ThemeProvider, useTheme } from '../context/ThemeContext';
-import { Sun, Moon, Menu, X, Monitor } from 'lucide-react';
+import { Sun, Moon, Menu, X, Monitor, Mail, Bug } from 'lucide-react';
 import ConnectionStatus from './ConnectionStatus';
 import Logo from './Logo';
 
@@ -245,8 +245,19 @@ const LayoutContent: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                 <span className="text-sm font-semibold text-gray-900 dark:text-white tracking-tight">InterviewXpert</span>
               </div>
 
+              <div className="flex items-center gap-3">
+                <Link to="/contact" className="group flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-white/5 hover:bg-blue-50 dark:hover:bg-blue-900/20 text-xs font-medium text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-all border border-gray-200 dark:border-white/10 hover:border-blue-200 dark:hover:border-blue-800 shadow-sm hover:shadow-md">
+                  <Mail size={14} className="group-hover:scale-110 transition-transform" />
+                  <span>Contact Us</span>
+                </Link>
+                <Link to="/report-bug" className="group flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-white/5 hover:bg-red-50 dark:hover:bg-red-900/20 text-xs font-medium text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-all border border-gray-200 dark:border-white/10 hover:border-red-200 dark:hover:border-red-800 shadow-sm hover:shadow-md">
+                  <Bug size={14} className="group-hover:scale-110 transition-transform" />
+                  <span>Report Bug</span>
+                </Link>
+              </div>
+
               <div className="text-xs text-gray-400 dark:text-gray-600 font-medium">
-                &copy; {new Date().getFullYear()} InterviewXpert Inc.
+                &copy; 2026 InterviewXpert Inc.
               </div>
             </div>
           </div>

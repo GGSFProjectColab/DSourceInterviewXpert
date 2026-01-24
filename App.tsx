@@ -33,6 +33,8 @@ import CreateTest from './pages/CreateTest';
 import TakeTest from './pages/TakeTest';
 import TestResults from './pages/TestResults';
 import CandidateTests from './pages/CandidateTests';
+import ContactUs from './pages/ContactUs';
+import ReportBug from './pages/ReportBug';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode; role?: 'recruiter' | 'candidate' | 'admin' }> = ({ children, role }) => {
   const { user, userProfile, loading } = useAuth();
@@ -96,6 +98,8 @@ const App: React.FC = () => {
             <Route path="/" element={<HomeRoute />} />
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/blogs" element={<Blogs />} />
+            <Route path="/contact" element={<ContactUs />} />
+            <Route path="/report-bug" element={<ReportBug />} />
             <Route path="/blog/:id" element={
               <ThemeProvider>
                 <BlogDetail />

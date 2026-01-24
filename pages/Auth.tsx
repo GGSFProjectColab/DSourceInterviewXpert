@@ -6,6 +6,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { BackgroundPaths } from '../components/landing/FloatingPaths';
 import Logo from '../components/Logo';
+import { Mail, Bug } from 'lucide-react';
 
 const AuthPage: React.FC = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -488,7 +489,22 @@ const AuthPage: React.FC = () => {
       </div>
 
       {/* Footer - Minimal */}
-      <footer className="relative z-10 py-4 text-center border-t border-white/5 bg-black">
+      <footer className="relative z-10 py-6 text-center border-t border-white/5 bg-black/50 backdrop-blur-sm">
+        <div className="flex items-center justify-center gap-6 mb-4">
+          <Link to="/contact" className="group flex items-center gap-2 text-xs font-medium text-zinc-400 hover:text-white transition-colors">
+            <span className="p-1.5 rounded-lg bg-white/5 group-hover:bg-white/10 transition-colors ring-1 ring-white/5 group-hover:ring-white/20">
+              <Mail size={14} />
+            </span>
+            Contact Support
+          </Link>
+          <div className="w-px h-4 bg-white/10"></div>
+          <Link to="/report-bug" className="group flex items-center gap-2 text-xs font-medium text-zinc-400 hover:text-red-400 transition-colors">
+            <span className="p-1.5 rounded-lg bg-white/5 group-hover:bg-red-500/10 transition-colors ring-1 ring-white/5 group-hover:ring-red-500/20">
+              <Bug size={14} />
+            </span>
+            Report Issue
+          </Link>
+        </div>
         <p className="text-[10px] text-zinc-600">
           &copy; {new Date().getFullYear()} InterviewXpert. Designed by <span className="text-zinc-400">Team Interview Expert</span>.
         </p>

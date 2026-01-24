@@ -7,7 +7,7 @@ import { getAuth, createUserWithEmailAndPassword, signOut } from 'firebase/auth'
 import { db, auth } from '../services/firebase';
 import { RevenueAreaChart, UserPieChart, JobBarChart } from '../components/AdminCharts';
 import { GShapeAnimation } from '../components/AdminAnimations';
-import { Users, FileText, DollarSign, UserPlus, Briefcase, CheckCircle, XCircle, Trash2, Bell, Sun, Moon, Monitor, Video, Menu, X, Search, ShieldCheck, ShieldX, BookOpen } from 'lucide-react';
+import { Users, FileText, DollarSign, UserPlus, Briefcase, CheckCircle, XCircle, Trash2, Bell, Sun, Moon, Monitor, Video, Menu, X, Search, ShieldCheck, ShieldX, BookOpen, MessageSquare as MessageSquareIcon, Bug } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { useMessageBox } from '../components/MessageBox';
 import Logo from '../components/Logo';
@@ -19,11 +19,13 @@ const AdminDashboard: React.FC = () => {
   const [jobs, setJobs] = useState<any[]>([]);
   const [transactions, setTransactions] = useState<any[]>([]);
   const [interviews, setInterviews] = useState<any[]>([]);
+  const [contactSubmissions, setContactSubmissions] = useState<any[]>([]);
+  const [bugReports, setBugReports] = useState<any[]>([]);
   const [adminData, setAdminData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   // UI State
-  const [activeTab, setActiveTab] = useState<'overview' | 'requests' | 'users' | 'jobs' | 'transactions'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'requests' | 'users' | 'jobs' | 'transactions' | 'submissions'>('overview');
   const [processingId, setProcessingId] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [userFilter, setUserFilter] = useState<'all' | 'candidate' | 'recruiter'>('all');
@@ -85,6 +87,18 @@ const AdminDashboard: React.FC = () => {
       });
     }
 
+    // 7. Contact Submissions
+    const qContact = query(collection(db, 'contactSubmissions'), orderBy('createdAt', 'desc'));
+    const unsubContact = onSnapshot(qContact, (snap) => {
+      setContactSubmissions(snap.docs.map(d => ({ id: d.id, ...d.data() })));
+    });
+
+    // 8. Bug Reports
+    const qBugs = query(collection(db, 'bugReports'), orderBy('createdAt', 'desc'));
+    const unsubBugs = onSnapshot(qBugs, (snap) => {
+      setBugReports(snap.docs.map(d => ({ id: d.id, ...d.data() })));
+    });
+
     return () => {
       unsubRequests();
       unsubUsers();
@@ -92,6 +106,8 @@ const AdminDashboard: React.FC = () => {
       unsubTransactions();
       unsubInterviews();
       unsubAdmin();
+      unsubContact();
+      unsubBugs();
     };
   }, []);
 
@@ -224,6 +240,26 @@ const AdminDashboard: React.FC = () => {
     try { await updateDoc(doc(db, 'users', user.id), { adminVerified: newStatus }); } catch (error) { console.error("Error updating verification:", error); }
   };
 
+  const handleMarkContactRead = async (id: string) => {
+    try {
+      await updateDoc(doc(db, 'contactSubmissions', id), { status: 'read' });
+      messageBox.showSuccess("Marked as read");
+    } catch (error) {
+      console.error("Error updating contact:", error);
+      messageBox.showError("Failed to update status");
+    }
+  };
+
+  const handleMarkBugFixed = async (id: string) => {
+    try {
+      await updateDoc(doc(db, 'bugReports', id), { status: 'fixed' });
+      messageBox.showSuccess("Marked as fixed");
+    } catch (error) {
+      console.error("Error updating bug:", error);
+      messageBox.showError("Failed to update status");
+    }
+  };
+
   // --- Derived Data for Charts ---
 
   // Revenue Data (Grouped by Date)
@@ -335,9 +371,14 @@ const AdminDashboard: React.FC = () => {
       case 'users': return users.filter(u => (u.fullname?.toLowerCase().includes(term) || u.email?.toLowerCase().includes(term)) && (userFilter === 'all' || u.role === userFilter));
       case 'jobs': return jobs.filter(j => j.title?.toLowerCase().includes(term) || j.companyName?.toLowerCase().includes(term));
       case 'transactions': return transactions.filter(t => t.userName?.toLowerCase().includes(term) || t.paymentId?.toLowerCase().includes(term));
+      case 'submissions':
+        const filteredContacts = contactSubmissions.filter(c => c.status !== 'read' && (c.name?.toLowerCase().includes(term) || c.email?.toLowerCase().includes(term) || c.subject?.toLowerCase().includes(term)));
+        const filteredBugs = bugReports.filter(b => b.status !== 'fixed' && (b.name?.toLowerCase().includes(term) || b.email?.toLowerCase().includes(term) || b.feature?.toLowerCase().includes(term)));
+        return { contacts: filteredContacts, bugs: filteredBugs };
       default: return [];
     }
   };
+  const submissionsData = activeTab === 'submissions' ? filteredData() as { contacts: any[], bugs: any[] } : { contacts: [], bugs: [] };
 
   // --- Render ---
 
@@ -475,6 +516,7 @@ const AdminDashboard: React.FC = () => {
               { id: 'users', label: 'Users', icon: Users, count: users.length },
               { id: 'jobs', label: 'Jobs', icon: FileText, count: jobs.length },
               { id: 'transactions', label: 'Transactions', icon: DollarSign },
+              { id: 'submissions', label: 'Inbox', icon: MessageSquareIcon, count: contactSubmissions.length + bugReports.length },
               { id: 'blogs', label: 'Manage Blogs', icon: BookOpen }
             ].map(item => (
               <button
@@ -511,6 +553,7 @@ const AdminDashboard: React.FC = () => {
             { id: 'users', label: 'Users', icon: Users, count: users.length },
             { id: 'jobs', label: 'Jobs', icon: FileText, count: jobs.length },
             { id: 'transactions', label: 'Transactions', icon: DollarSign },
+            { id: 'submissions', label: 'Inbox', icon: MessageSquareIcon, count: contactSubmissions.length + bugReports.length },
             { id: 'blogs', label: 'Manage Blogs', icon: BookOpen }
           ].map(item => (
             <button
@@ -751,6 +794,86 @@ const AdminDashboard: React.FC = () => {
                     </div>
                   </div>
                 ))}
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'submissions' && (
+            <div className="space-y-8">
+              {/* Search Input */}
+              <div className="relative animated-item">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Search submissions by name, email, or subject..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-zinc-900 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                />
+              </div>
+
+              {/* Contact Submissions */}
+              <div className="space-y-4">
+                <h2 className="text-xl sm:text-2xl font-bold">Contact Messages ({submissionsData.contacts.length})</h2>
+                <div className="grid gap-4">
+                  {submissionsData.contacts.length === 0 ? <p className="text-gray-500 animated-item">No contact messages.</p> : submissionsData.contacts.map((c) => (
+                    <div key={c.id} className="animated-item p-5 rounded-xl bg-white dark:bg-zinc-900 border border-gray-200 dark:border-white/5 shadow-sm">
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <h4 className="font-bold">{c.subject || 'No Subject'}</h4>
+                          <p className="text-sm text-gray-500">{c.name} ({c.email})</p>
+                        </div>
+                        <div className="flex flex-col items-end gap-2">
+                          <span className="text-xs text-gray-400">{c.createdAt?.toDate().toLocaleDateString()}</span>
+                          <button onClick={() => handleMarkContactRead(c.id)} className="flex items-center gap-1 px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-bold rounded-lg hover:bg-green-200 dark:hover:bg-green-900/50 transition-colors">
+                            <CheckCircle size={12} /> Mark Read
+                          </button>
+                        </div>
+                      </div>
+                      <p className="mt-3 text-sm text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-black/20 p-3 rounded-lg">{c.message}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Bug Reports */}
+              <div className="space-y-4">
+                <h2 className="text-xl sm:text-2xl font-bold">Bug Reports ({submissionsData.bugs.length})</h2>
+                <div className="grid gap-4">
+                  {submissionsData.bugs.length === 0 ? <p className="text-gray-500 animated-item">No bug reports.</p> : submissionsData.bugs.map((b) => (
+                    <div key={b.id} className="animated-item p-5 rounded-xl bg-white dark:bg-zinc-900 border border-gray-200 dark:border-white/5 shadow-sm">
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <h4 className="font-bold text-red-500 flex items-center gap-2"><Bug size={16} /> {b.feature}</h4>
+                          <p className="text-sm text-gray-500">{b.name || 'Anonymous'} ({b.email || 'No email'})</p>
+                          <div className="flex gap-2 mt-2">
+                            <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase ${
+                                b.severity === 'critical' ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400' :
+                                b.severity === 'high' ? 'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400' :
+                                b.severity === 'medium' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400' :
+                                'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400'
+                            }`}>
+                                {b.severity || 'medium'}
+                            </span>
+                            <span className="text-[10px] px-2 py-0.5 rounded-full font-bold uppercase bg-gray-100 text-gray-600 dark:bg-white/10 dark:text-gray-400 border border-gray-200 dark:border-white/10">
+                                {b.type || 'functional'}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="flex flex-col items-end gap-2">
+                          <span className="text-xs text-gray-400">{b.createdAt?.toDate().toLocaleDateString()}</span>
+                          <button onClick={() => handleMarkBugFixed(b.id)} className="flex items-center gap-1 px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-xs font-bold rounded-lg hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors">
+                            <CheckCircle size={12} /> Mark Fixed
+                          </button>
+                        </div>
+                      </div>
+                      <div className="mt-3 space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                        <p><strong className="text-gray-500">Description:</strong> {b.description}</p>
+                        {b.steps && <p className="mt-2 bg-gray-50 dark:bg-black/20 p-3 rounded-lg"><strong className="text-gray-500">Steps to reproduce:</strong><br/>{b.steps}</p>}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           )}

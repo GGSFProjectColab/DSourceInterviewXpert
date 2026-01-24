@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
-import { Menu, X, Sun, Moon, FileText, Mic, CheckCircle, GraduationCap, Briefcase, Shuffle, Brain, FileSearch, MessageSquare, User, Bot, Code, Rocket, Video, Target } from 'lucide-react';
+import { Menu, X, Sun, Moon, FileText, Mic, CheckCircle, GraduationCap, Briefcase, Shuffle, Brain, FileSearch, MessageSquare, User, Bot, Code, Rocket, Video, Target, Mail, Bug } from 'lucide-react';
 import { BentoGrid, BentoCard } from '../components/landing/BentoGrid';
 
 import { AnimatedBeam } from '../components/landing/AnimatedBeam';
@@ -1174,6 +1174,16 @@ const Footer: React.FC = () => (
             <li><a href="#jobs" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Jobs</a></li>
             <li><a href="#testimonials" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Success Stories</a></li>
             <li><a href="#faq" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">FAQ</a></li>
+            <li className="pt-2 mt-2 border-t border-slate-200 dark:border-slate-800">
+              <Link to="/contact" className="flex items-center gap-2 text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium group">
+                <Mail size={14} className="group-hover:scale-110 transition-transform" /> Contact Us
+              </Link>
+            </li>
+            <li>
+              <Link to="/report-bug" className="flex items-center gap-2 text-slate-700 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-400 transition-colors font-medium group">
+                <Bug size={14} className="group-hover:scale-110 transition-transform" /> Report a Bug
+              </Link>
+            </li>
           </ul>
         </div>
 
