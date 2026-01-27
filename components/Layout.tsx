@@ -46,7 +46,7 @@ const LayoutContent: React.FC<{ children: React.ReactNode }> = ({ children }) =>
         }}>
       </div>
 
-      <nav className="bg-white/80 dark:bg-[#050505]/80 backdrop-blur-xl border-b border-gray-200 dark:border-white/5 sticky top-0 z-[100] transition-all duration-300">
+      <nav className="bg-white/80 dark:bg-[#050505]/80 backdrop-blur-xl border-b border-gray-200 dark:border-white/5 sticky top-0 z-40 transition-all duration-300">
         <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
 
@@ -232,7 +232,7 @@ const LayoutContent: React.FC<{ children: React.ReactNode }> = ({ children }) =>
         </div>
       </nav>
 
-      <main className={`flex-grow w-full ${isActive('/candidate/ai-agent') ? '' : 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8'} relative z-10`}>
+      <main className={`flex-grow w-full ${isActive('/candidate/ai-agent') ? '' : 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8'} relative`}>
         {children}
       </main>
 
