@@ -75,14 +75,14 @@ const TicTacToe: React.FC = () => {
       </h3>
       <div className="grid grid-cols-3 gap-2 mb-6">
         {board.map((cell, i) => (
-          <button 
-            key={i} 
-            onClick={() => handleClick(i)} 
-            disabled={!!cell || !!winner || !isXNext} 
+          <button
+            key={i}
+            onClick={() => handleClick(i)}
+            disabled={!!cell || !!winner || !isXNext}
             className={`w-20 h-20 text-3xl font-bold flex items-center justify-center rounded-xl shadow-inner transition-all 
-              ${cell === 'X' ? 'bg-blue-100 text-blue-600 dark:bg-blue-900/50 dark:text-blue-400' : 
-                cell === 'O' ? 'bg-red-100 text-red-600 dark:bg-red-900/50 dark:text-red-400' : 
-                'bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700'}`}
+              ${cell === 'X' ? 'bg-blue-100 text-blue-600 dark:bg-blue-900/50 dark:text-blue-400' :
+                cell === 'O' ? 'bg-red-100 text-red-600 dark:bg-red-900/50 dark:text-red-400' :
+                  'bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700'}`}
           >
             {cell}
           </button>
@@ -112,7 +112,7 @@ const InterviewWizard: React.FC = () => {
     jobId: '', jobTitle: '', jobDescription: '', candidateResumeURL: null, candidateResumeMimeType: null,
     questions: [], answers: [], videoURLs: [], transcriptIds: [], transcriptTexts: [], currentQuestionIndex: 0
   });
-  
+
   const [loadingMsg, setLoadingMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [tabSwitches, setTabSwitches] = useState(0);
@@ -154,7 +154,7 @@ const InterviewWizard: React.FC = () => {
     }
 
     setLoadingMsg("Analyzing your profile data...");
-    setStep('setup'); 
+    setStep('setup');
 
     try {
       // Fetch detailed profile data from 'profiles' collection
@@ -181,7 +181,7 @@ const InterviewWizard: React.FC = () => {
         Bio: ${combinedProfile.bio}
         Education: ${combinedProfile.education}
       `;
-      
+
       // Convert text to base64 for the AI generator
       const base64String = btoa(unescape(encodeURIComponent(profileText)));
       // Use Data URI to avoid uploading text file as image/raw which might fail validation
@@ -207,7 +207,7 @@ const InterviewWizard: React.FC = () => {
     const img = new Image();
     img.onload = () => {
       const duration = (Date.now() - start) / 1000;
-      const speed = (50 * 8) / duration; 
+      const speed = (50 * 8) / duration;
       setSpeedStatus(speed > 1000 ? "Excellent 🚀" : speed > 500 ? "Good 🟢" : "Weak 🔴");
     };
     img.src = "https://i.ibb.co/3y9DKsB6/Yellow-and-Black-Illustrative-Education-Logo-1.png?t=" + start;
@@ -246,26 +246,26 @@ const InterviewWizard: React.FC = () => {
               <div><h4 className="font-bold">Camera On</h4><p className="text-sm text-gray-600 dark:text-gray-400">Ensure good lighting.</p></div>
             </div>
             <div className="bg-white dark:bg-gray-800 p-4 rounded-xl flex items-start gap-4 shadow-sm border border-gray-100 dark:border-gray-700">
-               <div className="bg-purple-100 dark:bg-purple-800 p-2 rounded-lg text-purple-600 dark:text-purple-300"><i className="fas fa-clock text-xl"></i></div>
-               <div><h4 className="font-bold">2 Minutes</h4><p className="text-sm text-gray-600 dark:text-gray-400">Time limit per answer.</p></div>
+              <div className="bg-purple-100 dark:bg-purple-800 p-2 rounded-lg text-purple-600 dark:text-purple-300"><i className="fas fa-clock text-xl"></i></div>
+              <div><h4 className="font-bold">2 Minutes</h4><p className="text-sm text-gray-600 dark:text-gray-400">Time limit per answer.</p></div>
             </div>
             <div className="bg-white dark:bg-gray-800 p-4 rounded-xl flex items-start gap-4 shadow-sm border border-gray-100 dark:border-gray-700">
-               <div className="bg-green-100 dark:bg-green-800 p-2 rounded-lg text-green-600 dark:text-green-300"><i className="fas fa-brain text-xl"></i></div>
-               <div><h4 className="font-bold">AI Generated</h4><p className="text-sm text-gray-600 dark:text-gray-400">Tailored to your resume.</p></div>
+              <div className="bg-green-100 dark:bg-green-800 p-2 rounded-lg text-green-600 dark:text-green-300"><i className="fas fa-brain text-xl"></i></div>
+              <div><h4 className="font-bold">AI Generated</h4><p className="text-sm text-gray-600 dark:text-gray-400">Tailored to your resume.</p></div>
             </div>
             <div className="bg-white dark:bg-gray-800 p-4 rounded-xl flex items-start gap-4 shadow-sm border border-gray-100 dark:border-gray-700">
-               <div className="bg-red-100 dark:bg-red-800 p-2 rounded-lg text-red-600 dark:text-red-300"><i className="fas fa-eye text-xl"></i></div>
-               <div><h4 className="font-bold">Proctored</h4><p className="text-sm text-gray-600 dark:text-gray-400">Tab switching is tracked.</p></div>
+              <div className="bg-red-100 dark:bg-red-800 p-2 rounded-lg text-red-600 dark:text-red-300"><i className="fas fa-eye text-xl"></i></div>
+              <div><h4 className="font-bold">Proctored</h4><p className="text-sm text-gray-600 dark:text-gray-400">Tab switching is tracked.</p></div>
             </div>
           </div>
 
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-6 border-t dark:border-gray-700">
-             <button onClick={checkSpeed} className="text-sm font-medium flex items-center gap-2 text-gray-500 hover:text-blue-600 transition-colors">
-               <i className="fas fa-wifi"></i> Check Speed {speedStatus && <span className={`px-2 py-0.5 rounded text-xs ${speedStatus.includes('Excellent') || speedStatus.includes('Good') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>{speedStatus}</span>}
-             </button>
-             <button onClick={() => setStep('check-profile')} className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-3 rounded-xl font-bold hover:shadow-lg hover:scale-[1.02] transition-all">
-               I'm Ready, Let's Go
-             </button>
+            <button onClick={checkSpeed} className="text-sm font-medium flex items-center gap-2 text-gray-500 hover:text-blue-600 transition-colors">
+              <i className="fas fa-wifi"></i> Check Speed {speedStatus && <span className={`px-2 py-0.5 rounded text-xs ${speedStatus.includes('Excellent') || speedStatus.includes('Good') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>{speedStatus}</span>}
+            </button>
+            <button onClick={() => setStep('check-profile')} className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-3 rounded-xl font-bold hover:shadow-lg hover:scale-[1.02] transition-all">
+              I'm Ready, Let's Go
+            </button>
           </div>
         </div>
       </Container>
@@ -278,9 +278,9 @@ const InterviewWizard: React.FC = () => {
         <div className="max-w-md w-full p-4 md:p-0">
           <h2 className="text-2xl font-bold mb-2">Profile Check</h2>
           <p className="text-gray-500 dark:text-gray-400 text-sm mb-6">We will use your profile data to generate interview questions.</p>
-          
+
           {errorMsg && <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-lg text-sm border border-red-200 dark:border-red-800">{errorMsg}</div>}
-          
+
           <div className="bg-white dark:bg-gray-800 p-6 rounded-xl mb-6 shadow-sm border border-gray-100 dark:border-gray-700">
             <div className="flex items-center gap-3 mb-2">
               <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-800 flex items-center justify-center text-blue-600 dark:text-blue-300">
@@ -308,13 +308,13 @@ const InterviewWizard: React.FC = () => {
     return (
       <Container>
         <div className="flex flex-col items-center max-w-md text-center">
-           <div className="relative w-24 h-24 mb-6">
-             <div className="absolute inset-0 border-4 border-gray-200 dark:border-gray-700 rounded-full"></div>
-             <div className="absolute inset-0 border-4 border-t-blue-500 border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin"></div>
-             <i className="fas fa-robot absolute inset-0 flex items-center justify-center text-3xl text-gray-400 dark:text-gray-500"></i>
-           </div>
-           <h3 className="text-xl font-bold text-gray-800 dark:text-white animate-pulse">{loadingMsg}</h3>
-           <p className="mt-4 text-gray-500 dark:text-gray-400 italic text-sm">"The first computer mouse was made of wood."</p>
+          <div className="relative w-24 h-24 mb-6">
+            <div className="absolute inset-0 border-4 border-gray-200 dark:border-gray-700 rounded-full"></div>
+            <div className="absolute inset-0 border-4 border-t-blue-500 border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin"></div>
+            <i className="fas fa-robot absolute inset-0 flex items-center justify-center text-3xl text-gray-400 dark:text-gray-500"></i>
+          </div>
+          <h3 className="text-xl font-bold text-gray-800 dark:text-white animate-pulse">{loadingMsg}</h3>
+          <p className="mt-4 text-gray-500 dark:text-gray-400 italic text-sm">"The first computer mouse was made of wood."</p>
         </div>
       </Container>
     );
@@ -322,8 +322,8 @@ const InterviewWizard: React.FC = () => {
 
   if (step === 'interview') {
     return (
-      <ActiveInterviewSession 
-        state={interviewState} 
+      <ActiveInterviewSession
+        state={interviewState}
         setState={setInterviewState}
         onFinish={(stats: any) => {
           setCvStats(stats);
@@ -359,7 +359,11 @@ const ActiveInterviewSession: React.FC<{
   const [isStopping, setIsStopping] = useState(false);
   const currentQ = state.questions[state.currentQuestionIndex];
   const [faceApiReady, setFaceApiReady] = useState(false);
-  
+  const [aiObservation, setAiObservation] = useState<string>('Initializing AI analysis...');
+
+  const [tabWarning, setTabWarning] = useState<string | null>(null);
+  const tabWarningTimerRef = useRef<any>(null);
+
   // Computer Vision State Refs (Simulating OpenCV)
   const cvDataRef = useRef({
     eyeContactFrames: 0,
@@ -389,10 +393,10 @@ const ActiveInterviewSession: React.FC<{
   // Real AI Analysis Loop
   useEffect(() => {
     if (!isRecording || !faceApiReady || !videoRef.current) return;
-    
+
     const faceapi = (window as any).faceapi;
     const video = videoRef.current;
-    
+
     // Motion detection setup
     const canvas = document.createElement('canvas');
     canvas.width = 320; // Low res for performance
@@ -407,48 +411,59 @@ const ActiveInterviewSession: React.FC<{
         // 1. Face Analysis
         // Using TinyFaceDetector for speed
         const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceExpressions();
-        
+
         cvDataRef.current.totalFrames++;
-        
+
         if (detections && detections.length > 0) {
-            // Assume the largest face is the candidate
-            const mainFace = detections[0]; 
-            
-            // Eye Contact (Proxy: Face detected = looking at screen)
-            cvDataRef.current.eyeContactFrames++;
-            
-            // Person Detection
-            cvDataRef.current.facesDetectedMax = Math.max(cvDataRef.current.facesDetectedMax, detections.length);
-            
-            // Expressions
-            const expr = mainFace.expressions;
-            // Find dominant expression
-            const sorted = Object.entries(expr).sort((a: any, b: any) => b[1] - a[1]);
-            const dominant = sorted[0][0]; // e.g., 'neutral'
-            if (cvDataRef.current.expressions[dominant] !== undefined) {
-                cvDataRef.current.expressions[dominant]++;
-            }
+          // Assume the largest face is the candidate
+          const mainFace = detections[0];
+
+          // Eye Contact (Proxy: Face detected = looking at screen)
+          cvDataRef.current.eyeContactFrames++;
+
+          // Person Detection
+          cvDataRef.current.facesDetectedMax = Math.max(cvDataRef.current.facesDetectedMax, detections.length);
+
+          // Expressions
+          const expr = mainFace.expressions;
+          // Find dominant expression
+          const sorted = Object.entries(expr).sort((a: any, b: any) => b[1] - a[1]);
+          const dominant = sorted[0][0]; // e.g., 'neutral'
+          if (cvDataRef.current.expressions[dominant] !== undefined) {
+            cvDataRef.current.expressions[dominant]++;
+          }
+          // Surface existing CV data for display (UI only)
+          const faceCount = detections.length;
+          const eyePct = Math.round((cvDataRef.current.eyeContactFrames / cvDataRef.current.totalFrames) * 100);
+          setAiObservation(
+            faceCount > 1
+              ? `⚠️ WARNING: ${faceCount} faces detected! Only the candidate should be visible.`
+              : `✅ Face detected • Eye contact: ${eyePct}% • Expression: ${dominant} • Confidence tracking active`
+          );
+        }
+        if (!detections || detections.length === 0) {
+          setAiObservation('⚠️ No face detected — Please look at the camera');
         }
 
         // 2. Motion Analysis (Confidence)
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
         const frame = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-        
+
         if (prevFrame) {
-            let diff = 0;
-            // Simple pixel diff (skip alpha)
-            for (let i = 0; i < frame.length; i += 4) {
-                if (Math.abs(frame[i] - prevFrame[i]) > 20 || 
-                    Math.abs(frame[i+1] - prevFrame[i+1]) > 20 || 
-                    Math.abs(frame[i+2] - prevFrame[i+2]) > 20) {
-                    diff++;
-                }
+          let diff = 0;
+          // Simple pixel diff (skip alpha)
+          for (let i = 0; i < frame.length; i += 4) {
+            if (Math.abs(frame[i] - prevFrame[i]) > 20 ||
+              Math.abs(frame[i + 1] - prevFrame[i + 1]) > 20 ||
+              Math.abs(frame[i + 2] - prevFrame[i + 2]) > 20) {
+              diff++;
             }
-            const motionPercent = diff / (canvas.width * canvas.height);
-            // Confidence score: High motion = Low confidence (fidgeting)
-            // Baseline: 0 motion = 100 confidence. 
-            const score = Math.max(0, 100 - (motionPercent * 500)); 
-            cvDataRef.current.confidenceScoreAcc += score;
+          }
+          const motionPercent = diff / (canvas.width * canvas.height);
+          // Confidence score: High motion = Low confidence (fidgeting)
+          // Baseline: 0 motion = 100 confidence. 
+          const score = Math.max(0, 100 - (motionPercent * 500));
+          cvDataRef.current.confidenceScoreAcc += score;
         }
         prevFrame = new Uint8ClampedArray(frame);
 
@@ -458,15 +473,29 @@ const ActiveInterviewSession: React.FC<{
     }, 500); // 2 FPS is enough for analysis and saves CPU
 
     return () => {
-        clearInterval(interval);
+      clearInterval(interval);
     };
   }, [isRecording, faceApiReady]);
 
   // Tab Visibility
   useEffect(() => {
-    const handleVisibility = () => { if (document.hidden) onTabSwitch(); };
+    const handleVisibility = () => {
+      if (document.hidden) {
+        onTabSwitch();
+        // Surface real-time warning to AI observation bar
+        const warning = '🚨 TAB SWITCH DETECTED — This activity has been recorded and will be flagged in your report.';
+        setTabWarning(warning);
+        setAiObservation(warning);
+        // Auto-clear the warning banner after 5 seconds
+        if (tabWarningTimerRef.current) clearTimeout(tabWarningTimerRef.current);
+        tabWarningTimerRef.current = setTimeout(() => setTabWarning(null), 5000);
+      }
+    };
     document.addEventListener("visibilitychange", handleVisibility);
-    return () => document.removeEventListener("visibilitychange", handleVisibility);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibility);
+      if (tabWarningTimerRef.current) clearTimeout(tabWarningTimerRef.current);
+    };
   }, [onTabSwitch]);
 
   // Camera
@@ -485,16 +514,84 @@ const ActiveInterviewSession: React.FC<{
     };
   }, []);
 
-  // TTS
+  // TTS auto-play — sentence-chunked to avoid Chrome's 15s cutoff
   useEffect(() => {
-    if ('speechSynthesis' in window) {
+    if (!('speechSynthesis' in window) || !currentQ) return;
+
+    let cancelled = false;
+    let speakTimeout: any = null;
+
+    // Split text into small chunks (~80 chars max) at sentence/clause boundaries
+    const splitIntoChunks = (text: string): string[] => {
+      // Split on sentence endings, commas, semicolons, or "and"/"or" conjunctions
+      const raw = text.match(/[^.!?;,]+[.!?;,]?/g) || [text];
+      const chunks: string[] = [];
+      let current = '';
+      for (const part of raw) {
+        if ((current + part).length > 80 && current.length > 0) {
+          chunks.push(current.trim());
+          current = part;
+        } else {
+          current += part;
+        }
+      }
+      if (current.trim()) chunks.push(current.trim());
+      return chunks.length > 0 ? chunks : [text];
+    };
+
+    const doSpeak = () => {
+      if (cancelled) return;
       window.speechSynthesis.cancel();
-      setTimeout(() => {
-        const utterance = new SpeechSynthesisUtterance(currentQ);
+
+      // Pick a good English voice
+      const voices = window.speechSynthesis.getVoices();
+      const selectedVoice = voices.find(v => v.lang.startsWith('en') && v.name.includes('Google'))
+        || voices.find(v => v.lang.startsWith('en') && !v.localService)
+        || voices.find(v => v.lang.startsWith('en'))
+        || voices[0] || null;
+
+      const chunks = splitIntoChunks(currentQ);
+      let idx = 0;
+
+      const speakNext = () => {
+        if (cancelled || idx >= chunks.length) return;
+        const utterance = new SpeechSynthesisUtterance(chunks[idx]);
+        utterance.rate = 1;
+        utterance.pitch = 1;
+        if (selectedVoice) utterance.voice = selectedVoice;
+        utterance.onend = () => { idx++; speakNext(); };
+        utterance.onerror = () => { idx++; speakNext(); };
         window.speechSynthesis.speak(utterance);
-      }, 500);
+      };
+
+      speakNext();
+    };
+
+    // Wait for voices to be loaded (Chrome loads them async)
+    const voices = window.speechSynthesis.getVoices();
+    if (voices.length > 0) {
+      speakTimeout = setTimeout(doSpeak, 600);
+    } else {
+      const onVoicesReady = () => {
+        window.speechSynthesis.removeEventListener('voiceschanged', onVoicesReady);
+        if (!cancelled) speakTimeout = setTimeout(doSpeak, 300);
+      };
+      window.speechSynthesis.addEventListener('voiceschanged', onVoicesReady);
+      // Fallback if voiceschanged never fires
+      speakTimeout = setTimeout(() => {
+        window.speechSynthesis.removeEventListener('voiceschanged', onVoicesReady);
+        if (!cancelled) doSpeak();
+      }, 1500);
     }
+
+    return () => {
+      cancelled = true;
+      if (speakTimeout) clearTimeout(speakTimeout);
+      window.speechSynthesis.cancel();
+    };
   }, [currentQ]);
+
+
 
   // Auto-Logic
   useEffect(() => {
@@ -518,7 +615,7 @@ const ActiveInterviewSession: React.FC<{
   const startRecording = () => {
     if ('speechSynthesis' in window) window.speechSynthesis.cancel();
     if (!streamRef.current) return;
-    
+
     const recorder = new MediaRecorder(streamRef.current, { videoBitsPerSecond: 250000 });
     recorder.ondataavailable = (e) => { if (e.data.size > 0) chunksRef.current.push(e.data); };
     recorder.onstop = async () => {
@@ -530,16 +627,16 @@ const ActiveInterviewSession: React.FC<{
       try {
         videoUrl = await uploadToCloudinary(blob, 'video');
         transcriptId = await requestTranscription(videoUrl);
-      } catch (err) { console.error("Upload error", err); } 
+      } catch (err) { console.error("Upload error", err); }
 
       const idx = state.currentQuestionIndex;
       const isLast = idx >= state.questions.length - 1;
-      
+
       setState(prev => {
-         const newVids = [...prev.videoURLs]; newVids[idx] = videoUrl;
-         const newTrans = [...prev.transcriptIds]; newTrans[idx] = transcriptId;
-         const newAns = [...prev.answers]; newAns[idx] = "Answered";
-         return { ...prev, videoURLs: newVids, transcriptIds: newTrans, answers: newAns, currentQuestionIndex: isLast ? idx : idx + 1 };
+        const newVids = [...prev.videoURLs]; newVids[idx] = videoUrl;
+        const newTrans = [...prev.transcriptIds]; newTrans[idx] = transcriptId;
+        const newAns = [...prev.answers]; newAns[idx] = "Answered";
+        return { ...prev, videoURLs: newVids, transcriptIds: newTrans, answers: newAns, currentQuestionIndex: isLast ? idx : idx + 1 };
       });
 
       setProcessingVideo(false);
@@ -573,78 +670,189 @@ const ActiveInterviewSession: React.FC<{
     }
   };
 
-  // --- ZEN MODE CONTAINER (Hides Navbar via z-index & fixed positioning) ---
+  // --- SPLIT-PANEL DASHBOARD LAYOUT ---
   return (
-    <div className="fixed inset-0 z-[9999] bg-gray-50 dark:bg-slate-950 text-gray-900 dark:text-white flex flex-col overflow-hidden transition-colors duration-300">
-      
-      {/* Header Info - Mobile Friendly */}
-      <div className="flex justify-between items-center p-4 z-10 bg-white/5 dark:bg-black/20 backdrop-blur-sm shrink-0 border-b border-gray-200/10">
-        <div className="flex flex-col">
-          <span className="text-gray-500 dark:text-slate-400 text-[10px] uppercase tracking-widest">Question</span>
-          <span className="text-lg font-bold">{state.currentQuestionIndex + 1} <span className="text-gray-400 dark:text-slate-500 text-sm">/ {state.questions.length}</span></span>
+    <div className="fixed inset-0 z-[9999] bg-gray-100 dark:bg-slate-950 text-gray-900 dark:text-white flex flex-col overflow-hidden transition-colors duration-300">
+
+      {/* ── MAIN CONTENT: Camera (Left) + Question (Right) ── */}
+      <div className="flex-1 flex flex-col md:flex-row gap-3 p-3 overflow-hidden min-h-0">
+
+        {/* ═══ LEFT PANEL: Camera Feed ═══ */}
+        <div className="w-full md:w-5/12 flex flex-col gap-3 shrink-0 md:shrink md:min-h-0">
+          {/* Camera Card */}
+          <div className="relative flex-1 min-h-[240px] bg-gray-900 rounded-2xl overflow-hidden border border-gray-700/50 shadow-xl">
+            <video ref={videoRef} autoPlay muted playsInline className="w-full h-full object-cover transform scale-x-[-1]" />
+
+            {/* Countdown Overlay (scoped to camera) */}
+            {countdown > 0 && (
+              <div className="absolute inset-0 bg-black/70 backdrop-blur-sm flex flex-col items-center justify-center z-20 rounded-2xl">
+                <p className="text-white/80 text-lg font-light mb-2 tracking-widest uppercase">Get Ready</p>
+                <span className="text-8xl font-black text-white animate-ping" style={{ animationDuration: '1s' }}>{countdown}</span>
+              </div>
+            )}
+
+            {/* TicTacToe during processing (scoped to camera) */}
+            {processingVideo && <TicTacToe />}
+
+            {/* Gradient bottom edge */}
+            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-gray-900/80 to-transparent pointer-events-none"></div>
+          </div>
+
+          {/* Status Bar Below Camera */}
+          <div className="flex items-center justify-between px-4 py-2.5 bg-white dark:bg-gray-800/60 rounded-xl border border-gray-200 dark:border-gray-700/50 shadow-sm">
+            <div className="flex items-center gap-3">
+              {/* REC Indicator */}
+              {isRecording ? (
+                <div className="flex items-center gap-1.5 bg-red-500/15 text-red-600 dark:text-red-400 px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-wider animate-pulse">
+                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                  REC
+                </div>
+              ) : (
+                <div className="flex items-center gap-1.5 bg-gray-100 dark:bg-gray-700/50 text-gray-500 dark:text-gray-400 px-2.5 py-1 rounded-lg text-[11px] font-medium">
+                  <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
+                  STANDBY
+                </div>
+              )}
+              {/* AI Status */}
+              <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-mono font-semibold ${faceApiReady ? 'bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20' : 'bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 border border-yellow-500/20'}`}>
+                <div className={`w-1.5 h-1.5 rounded-full ${faceApiReady ? 'bg-green-500 animate-pulse' : 'bg-yellow-500'}`}></div>
+                {faceApiReady ? 'AI ACTIVE' : 'LOADING...'}
+              </div>
+            </div>
+          </div>
+
+          {/* OpenCV Tracking Info */}
+          <div className="px-4 py-3 bg-white dark:bg-gray-800/60 rounded-xl border border-gray-200 dark:border-gray-700/50 shadow-sm">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-5 h-5 rounded-md bg-blue-500/15 flex items-center justify-center">
+                <i className="fas fa-eye text-blue-500 text-[10px]"></i>
+              </div>
+              <span className="text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">Live AI Tracking</span>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              <div className="bg-gray-50 dark:bg-gray-700/40 rounded-lg px-3 py-2">
+                <p className="text-[10px] text-gray-500 dark:text-gray-400 uppercase tracking-wider">Eye Contact</p>
+                <p className="text-sm font-bold text-gray-800 dark:text-white">
+                  {cvDataRef.current.totalFrames > 0 ? `${Math.round((cvDataRef.current.eyeContactFrames / cvDataRef.current.totalFrames) * 100)}%` : '—'}
+                </p>
+              </div>
+              <div className="bg-gray-50 dark:bg-gray-700/40 rounded-lg px-3 py-2">
+                <p className="text-[10px] text-gray-500 dark:text-gray-400 uppercase tracking-wider">Faces Detected</p>
+                <p className="text-sm font-bold text-gray-800 dark:text-white">
+                  {cvDataRef.current.facesDetectedMax > 0 ? cvDataRef.current.facesDetectedMax : '—'}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-        
-         <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full font-mono font-bold text-sm ${timeLeft < 30 ? 'bg-red-100 text-red-600 border-red-200 dark:bg-red-900/50 dark:text-red-400 dark:border-red-800' : 'bg-white text-gray-700 border-gray-200 dark:bg-gray-800/50 dark:text-white dark:border-gray-700'} border shadow-sm`}>
-           <div className={`w-2 h-2 rounded-full ${isRecording ? 'bg-red-500 animate-pulse' : 'bg-gray-400 dark:bg-gray-500'}`}></div>
-           {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
-         </div>
+
+        {/* ═══ RIGHT PANEL: Question + Controls ═══ */}
+        <div className="w-full md:w-7/12 flex flex-col gap-3 min-h-0">
+          {/* Question Card */}
+          <div className="flex-1 flex flex-col bg-white dark:bg-gray-800/60 rounded-2xl border border-gray-200 dark:border-gray-700/50 shadow-xl overflow-hidden min-h-0">
+
+            {/* Question Header: Counter + Timer */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-700/50 shrink-0">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-blue-500/10 dark:bg-blue-500/15 flex items-center justify-center">
+                  <i className="fas fa-list-ol text-blue-500 text-sm"></i>
+                </div>
+                <div>
+                  <p className="text-[10px] text-gray-500 dark:text-gray-400 uppercase tracking-widest font-medium">Question</p>
+                  <p className="text-lg font-bold text-gray-800 dark:text-white">
+                    {state.currentQuestionIndex + 1} <span className="text-gray-400 dark:text-gray-500 text-sm font-normal">/ {state.questions.length}</span>
+                  </p>
+                </div>
+              </div>
+              {/* Timer */}
+              <div className={`flex items-center gap-2 px-4 py-2 rounded-xl font-mono font-bold text-sm transition-colors ${timeLeft < 30
+                ? 'bg-red-50 text-red-600 border-red-200 dark:bg-red-900/30 dark:text-red-400 dark:border-red-800'
+                : 'bg-gray-50 text-gray-700 border-gray-200 dark:bg-gray-700/50 dark:text-white dark:border-gray-600'
+                } border shadow-sm`}>
+                <div className={`w-2 h-2 rounded-full ${isRecording ? 'bg-red-500 animate-pulse' : 'bg-gray-400 dark:bg-gray-500'}`}></div>
+                <i className="fas fa-clock text-xs opacity-60"></i>
+                {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
+              </div>
+            </div>
+
+            {/* Question Body */}
+            <div className="flex-1 overflow-y-auto px-6 py-6 flex items-start">
+              <div className="w-full">
+                <p className="text-xs text-blue-500 dark:text-blue-400 font-semibold uppercase tracking-widest mb-3">
+                  <i className="fas fa-microphone-alt mr-1"></i> Answer this question
+                </p>
+                <h2 className="text-lg md:text-2xl font-semibold leading-relaxed text-gray-800 dark:text-gray-100">
+                  {currentQ}
+                </h2>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-gray-100 dark:border-gray-700/50 bg-gray-50/50 dark:bg-gray-800/30 shrink-0">
+
+              {/* Next / Stop Button */}
+              {isRecording ? (
+                <button
+                  onClick={stopRecording}
+                  className="flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold text-sm bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 shadow-lg shadow-blue-500/20 transform transition hover:scale-[1.02] active:scale-95"
+                >
+                  Next
+                  <i className="fas fa-arrow-right"></i>
+                </button>
+              ) : processingVideo || isStopping ? (
+                <div className="flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-medium text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 animate-pulse">
+                  <i className="fas fa-circle-notch fa-spin"></i>
+                  Processing...
+                </div>
+              ) : (
+                <div className="flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-medium text-gray-400 dark:text-gray-500 bg-gray-100 dark:bg-gray-700/30 border border-gray-200 dark:border-gray-600">
+                  <i className="fas fa-hourglass-half"></i>
+                  Waiting...
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Main Video Area - Flex Grow to fill space */}
-      <div className="relative flex-1 w-full bg-black overflow-hidden shadow-2xl flex items-center justify-center">
-        {processingVideo && <TicTacToe />}
-        
-        <video ref={videoRef} autoPlay muted playsInline className="w-full h-full object-cover transform scale-x-[-1]" />
-
-        {/* Countdown Overlay */}
-        {countdown > 0 && (
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center z-20">
-             <p className="text-white/90 text-xl font-light mb-2 tracking-widest uppercase">Get Ready</p>
-             <span className="text-9xl font-black text-white animate-ping" style={{ animationDuration: '1s' }}>{countdown}</span>
+      {/* ── BOTTOM PANEL: AI Observations ── */}
+      <div className="shrink-0 px-3 pb-3 space-y-2">
+        {/* Tab-switch warning banner (red, real-time) */}
+        {tabWarning && (
+          <div className="w-full px-5 py-3 bg-red-50 dark:bg-red-900/30 rounded-xl border border-red-200 dark:border-red-700/50 shadow-sm flex items-center gap-3 animate-pulse">
+            <div className="w-7 h-7 rounded-lg bg-red-500/15 flex items-center justify-center shrink-0">
+              <i className="fas fa-exclamation-triangle text-red-500 text-xs"></i>
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-[10px] text-red-600 dark:text-red-400 uppercase tracking-widest font-bold mb-0.5">⚠ Security Alert</p>
+              <p className="text-sm text-red-700 dark:text-red-300 font-semibold">{tabWarning}</p>
+            </div>
+            <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-red-500/10 text-red-600 dark:text-red-400 text-[10px] font-mono font-bold shrink-0">
+              <div className="w-1.5 h-1.5 bg-red-500 rounded-full animate-ping"></div>
+              FLAGGED
+            </div>
           </div>
         )}
-        
-        {/* CV Analysis Overlay */}
-        {isRecording && (
-          <div className="absolute top-4 right-4 flex flex-col items-end gap-2 z-20 pointer-events-none">
-             <div className="bg-black/60 backdrop-blur-md text-green-400 px-2 py-1 rounded text-[10px] font-mono border border-green-500/30 flex items-center gap-2">
-               <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div>
-               {faceApiReady ? 'AI ACTIVE' : 'INIT...'}
-             </div>
-             <div className="bg-black/60 backdrop-blur-md text-blue-400 px-2 py-1 rounded text-[10px] font-mono border border-blue-500/30">
-               ANALYZING
-             </div>
+        {/* Normal AI observation bar */}
+        <div className={`w-full px-5 py-3 rounded-xl border shadow-sm flex items-center gap-3 transition-colors duration-300 ${tabWarning
+          ? 'bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-700/50'
+          : 'bg-white dark:bg-gray-800/60 border-gray-200 dark:border-gray-700/50'
+          }`}>
+          <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${tabWarning ? 'bg-yellow-500/10 dark:bg-yellow-500/15' : 'bg-purple-500/10 dark:bg-purple-500/15'
+            }`}>
+            <i className={`fas text-xs ${tabWarning ? 'fa-shield-alt text-yellow-500' : 'fa-robot text-purple-500'}`}></i>
           </div>
-        )}
-
-        {/* Recording Indicator */}
-        {isRecording && (
-          <div className="absolute top-4 left-4 flex items-center gap-2 bg-red-600/90 text-white px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider shadow-lg animate-pulse pointer-events-none">
-            <span>REC</span>
+          <div className="flex-1 min-w-0">
+            <p className="text-[10px] text-gray-500 dark:text-gray-400 uppercase tracking-widest font-medium mb-0.5">AI Observation</p>
+            <p className="text-sm text-gray-700 dark:text-gray-300 truncate">{aiObservation}</p>
           </div>
-        )}
-
-        {/* Question Overlay (Bottom) */}
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent p-6 pt-20 pointer-events-none">
-           <div className="max-w-4xl mx-auto text-center md:text-left">
-             <h2 className="text-lg md:text-3xl font-semibold leading-tight text-white drop-shadow-md">{currentQ}</h2>
-           </div>
+          {isRecording && (
+            <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-green-500/10 text-green-600 dark:text-green-400 text-[10px] font-mono font-semibold shrink-0">
+              <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div>
+              LIVE
+            </div>
+          )}
         </div>
-      </div>
-
-      {/* Controls */}
-      <div className="p-6 bg-white dark:bg-slate-950 border-t border-gray-200 dark:border-gray-800 shrink-0 flex justify-center">
-         {isRecording ? (
-           <button onClick={stopRecording} className="w-full md:w-auto bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-xl font-bold shadow-lg shadow-red-900/20 transform transition hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-3 text-lg">
-             <div className="w-4 h-4 bg-white rounded-sm"></div> Stop & Submit Answer
-           </button>
-         ) : processingVideo || isStopping ? (
-           <div className="text-gray-500 dark:text-gray-400 animate-pulse flex items-center gap-2 py-2">
-             <i className="fas fa-circle-notch fa-spin text-xl"></i> <span className="text-lg font-medium">Processing Answer...</span>
-           </div>
-         ) : (
-           <div className="text-gray-500 dark:text-gray-400 text-sm py-2">Waiting for auto-start...</div>
-         )}
       </div>
     </div>
   );
@@ -679,36 +887,36 @@ const InterviewSubmission: React.FC<{
           state.transcriptIds.map(async (id) => {
             if (!id) return "";
             for (let i = 0; i < 10; i++) {
-               await new Promise(r => setTimeout(r, 2000));
-               const res = await fetchTranscriptText(id);
-               if (res.status === 'completed') return res.text!;
-               if (res.status === 'error') return "Error";
+              await new Promise(r => setTimeout(r, 2000));
+              const res = await fetchTranscriptText(id);
+              if (res.status === 'completed') return res.text!;
+              if (res.status === 'error') return "Error";
             }
             return "";
           })
         );
-        
+
         setStatus("AI Analyzing performance...");
         const resp = await fetch(state.candidateResumeURL!);
         const blob = await resp.blob();
         const reader = new FileReader();
         reader.readAsDataURL(blob);
         reader.onloadend = async () => {
-            const base64Resume = (reader.result as string).split(',')[1];
-            const feedbackRaw = await generateFeedback(
-              state.jobTitle, state.jobDescription, `${userProfile.experience} years`, base64Resume, state.candidateResumeMimeType!, state.questions, transcriptTexts
-            );
-            const parseScore = (regex: RegExp) => (feedbackRaw.match(regex) ? feedbackRaw.match(regex)![1] + "/100" : "N/A");
-            
-            setStatus("Saving Report...");
-            const docRef = await addDoc(collection(db, 'interviews'), {
-              ...state, transcriptTexts, feedback: feedbackRaw,
-              score: parseScore(/Overall Score:\s*(\d{1,3})/i),
-              resumeScore: parseScore(/Resume Score:\s*(\d{1,3})/i),
-              qnaScore: parseScore(/Q&A Score:\s*(\d{1,3})/i),
-              candidateUID: user.uid, candidateName: userProfile.fullname, candidateEmail: user.email, status: 'Pending', submittedAt: serverTimestamp(), meta: { tabSwitchCount: tabSwitches, cvStats }
-            });
-            navigate(`/report/${docRef.id}`);
+          const base64Resume = (reader.result as string).split(',')[1];
+          const feedbackRaw = await generateFeedback(
+            state.jobTitle, state.jobDescription, `${userProfile.experience} years`, base64Resume, state.candidateResumeMimeType!, state.questions, transcriptTexts
+          );
+          const parseScore = (regex: RegExp) => (feedbackRaw.match(regex) ? feedbackRaw.match(regex)![1] + "/100" : "N/A");
+
+          setStatus("Saving Report...");
+          const docRef = await addDoc(collection(db, 'interviews'), {
+            ...state, transcriptTexts, feedback: feedbackRaw,
+            score: parseScore(/Overall Score:\s*(\d{1,3})/i),
+            resumeScore: parseScore(/Resume Score:\s*(\d{1,3})/i),
+            qnaScore: parseScore(/Q&A Score:\s*(\d{1,3})/i),
+            candidateUID: user.uid, candidateName: userProfile.fullname, candidateEmail: user.email, status: 'Pending', submittedAt: serverTimestamp(), meta: { tabSwitchCount: tabSwitches, cvStats }
+          });
+          navigate(`/report/${docRef.id}`);
         };
       } catch (err) { setStatus("Error saving. Please contact support."); }
     };
