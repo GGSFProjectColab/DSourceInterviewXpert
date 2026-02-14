@@ -350,32 +350,38 @@ const Navbar: React.FC = () => {
 
 
 
-const Hero: React.FC = () => (
-  <div className="relative min-h-screen flex items-center justify-center pt-32 md:pt-40 overflow-hidden">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-      <div className="text-center max-w-4xl mx-auto">
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-6 md:mb-8 leading-tight">
-          Master Your Next <br className="hidden sm:block" />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-600 to-primary bg-300% animate-pulse">Interview with AI</span>
-        </h1>
-        <p className="mt-4 text-lg sm:text-xl md:text-2xl text-slate-600 dark:text-slate-300 mb-8 md:mb-12 max-w-3xl mx-auto leading-relaxed">
-          From building a perfect resume to mastering the interview. <br className="hidden md:block" />
-          Our fully automated AI platform prepares you for your dream job.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center px-4 sm:px-0">
-          <Link to="/auth" className="px-8 py-4 bg-primary text-white rounded-full font-bold text-lg hover:bg-primary-dark transition-all shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-1 flex items-center justify-center gap-2">
-            <i className="fa-solid fa-rocket"></i> Start Practicing Free
-          </Link>
-          <a href="https://youtu.be/9UhI3l23OLg?si=3SD1onwea7xp251i" target="_blank" rel="noopener noreferrer" className="px-8 py-4 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 rounded-full font-bold text-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-all hover:shadow-lg hover:-translate-y-1 flex items-center justify-center gap-2">
-            <i className="fa-solid fa-chart-line"></i> View Demo
-          </a>
-        </div>
+const Hero: React.FC = () => {
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
 
-        <div className="mt-12 md:mt-16 pt-8 border-t border-slate-200/60 dark:border-slate-700/60">
-          <p className="text-sm text-slate-400 font-medium mb-6 uppercase tracking-widest">Trusted by candidates applying to</p>
+  return (
+    <div className="relative min-h-screen flex items-center justify-center pt-32 md:pt-40 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <div className="text-center max-w-4xl mx-auto">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-6 md:mb-8 leading-tight">
+            Master Your Next <br className="hidden sm:block" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-600 to-primary bg-300% animate-pulse">Interview with AI</span>
+          </h1>
+          <p className="mt-4 text-lg sm:text-xl md:text-2xl text-slate-600 dark:text-slate-300 mb-8 md:mb-12 max-w-3xl mx-auto leading-relaxed">
+            From building a perfect resume to mastering the interview. <br className="hidden md:block" />
+            Our fully automated AI platform prepares you for your dream job.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center px-4 sm:px-0">
+            <Link to="/auth" className="px-8 py-4 bg-primary text-white rounded-full font-bold text-lg hover:bg-primary-dark transition-all shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-1 flex items-center justify-center gap-2">
+              <i className="fa-solid fa-rocket"></i> Start Practicing Free
+            </Link>
+            <button 
+              onClick={() => setIsVideoOpen(true)} 
+              className="px-8 py-4 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 rounded-full font-bold text-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-all hover:shadow-lg hover:-translate-y-1 flex items-center justify-center gap-2"
+            >
+              <i className="fa-solid fa-chart-line"></i> View Demo
+            </button>
+          </div>
 
-          {/* Infinite Marquee Animation Styles */}
-          <style>{`
+          <div className="mt-12 md:mt-16 pt-8 border-t border-slate-200/60 dark:border-slate-700/60">
+            <p className="text-sm text-slate-400 font-medium mb-6 uppercase tracking-widest">Trusted by candidates applying to</p>
+
+            {/* Infinite Marquee Animation Styles */}
+            <style>{`
             @keyframes marquee {
               0% {
                 transform: translateX(0);
@@ -400,53 +406,91 @@ const Hero: React.FC = () => (
             }
           `}</style>
 
-          <div className="marquee-container">
-            <div className="marquee-track opacity-60 grayscale hover:grayscale-0 transition-all duration-500 dark:brightness-200 dark:contrast-100">
-              {/* First set of logos */}
-              <div className="flex items-center gap-10 md:gap-16 px-8">
-                <i className="fab fa-google text-3xl hover:text-[#4285F4] transition-colors cursor-pointer" title="Google"></i>
-                <i className="fab fa-microsoft text-3xl hover:text-[#00a4ef] transition-colors cursor-pointer" title="Microsoft"></i>
-                <i className="fab fa-amazon text-3xl hover:text-[#FF9900] transition-colors cursor-pointer" title="Amazon"></i>
-                <i className="fab fa-meta text-3xl hover:text-[#0668E1] transition-colors cursor-pointer" title="Meta"></i>
-                <i className="fab fa-apple text-3xl hover:text-[#000000] dark:hover:text-white transition-colors cursor-pointer" title="Apple"></i>
-                <i className="fab fa-spotify text-3xl hover:text-[#1DB954] transition-colors cursor-pointer" title="Spotify"></i>
-                <i className="fab fa-linkedin text-3xl hover:text-[#0A66C2] transition-colors cursor-pointer" title="LinkedIn"></i>
-                <i className="fab fa-uber text-3xl hover:text-[#000000] dark:hover:text-white transition-colors cursor-pointer" title="Uber"></i>
-                <i className="fab fa-adobe text-3xl hover:text-[#FF0000] transition-colors cursor-pointer" title="Adobe"></i>
-                <span className="text-2xl font-bold hover:text-[#E82127] transition-colors cursor-pointer" title="Netflix">N</span>
-                <span className="text-2xl font-bold hover:text-[#CC0000] transition-colors cursor-pointer" title="Tesla">T</span>
-                <span className="text-2xl font-bold hover:text-[#EA4335] transition-colors cursor-pointer" title="Oracle">O</span>
-                <span className="text-2xl font-bold hover:text-[#00A1E0] transition-colors cursor-pointer" title="Salesforce">S</span>
-                <span className="text-2xl font-bold hover:text-[#0530AD] transition-colors cursor-pointer" title="IBM">IBM</span>
-                <span className="text-2xl font-bold hover:text-[#0071C5] transition-colors cursor-pointer" title="Intel">Intel</span>
-                <span className="text-2xl font-bold hover:text-[#76B900] transition-colors cursor-pointer" title="Nvidia">Nvidia</span>
-              </div>
-              {/* Duplicate set for seamless infinite loop */}
-              <div className="flex items-center gap-10 md:gap-16 px-8">
-                <i className="fab fa-google text-3xl hover:text-[#4285F4] transition-colors cursor-pointer" title="Google"></i>
-                <i className="fab fa-microsoft text-3xl hover:text-[#00a4ef] transition-colors cursor-pointer" title="Microsoft"></i>
-                <i className="fab fa-amazon text-3xl hover:text-[#FF9900] transition-colors cursor-pointer" title="Amazon"></i>
-                <i className="fab fa-meta text-3xl hover:text-[#0668E1] transition-colors cursor-pointer" title="Meta"></i>
-                <i className="fab fa-apple text-3xl hover:text-[#000000] dark:hover:text-white transition-colors cursor-pointer" title="Apple"></i>
-                <i className="fab fa-spotify text-3xl hover:text-[#1DB954] transition-colors cursor-pointer" title="Spotify"></i>
-                <i className="fab fa-linkedin text-3xl hover:text-[#0A66C2] transition-colors cursor-pointer" title="LinkedIn"></i>
-                <i className="fab fa-uber text-3xl hover:text-[#000000] dark:hover:text-white transition-colors cursor-pointer" title="Uber"></i>
-                <i className="fab fa-adobe text-3xl hover:text-[#FF0000] transition-colors cursor-pointer" title="Adobe"></i>
-                <span className="text-2xl font-bold hover:text-[#E82127] transition-colors cursor-pointer" title="Netflix">N</span>
-                <span className="text-2xl font-bold hover:text-[#CC0000] transition-colors cursor-pointer" title="Tesla">T</span>
-                <span className="text-2xl font-bold hover:text-[#EA4335] transition-colors cursor-pointer" title="Oracle">O</span>
-                <span className="text-2xl font-bold hover:text-[#00A1E0] transition-colors cursor-pointer" title="Salesforce">S</span>
-                <span className="text-2xl font-bold hover:text-[#0530AD] transition-colors cursor-pointer" title="IBM">IBM</span>
-                <span className="text-2xl font-bold hover:text-[#0071C5] transition-colors cursor-pointer" title="Intel">Intel</span>
-                <span className="text-2xl font-bold hover:text-[#76B900] transition-colors cursor-pointer" title="Nvidia">Nvidia</span>
+            <div className="marquee-container">
+              <div className="marquee-track opacity-60 grayscale hover:grayscale-0 transition-all duration-500 dark:brightness-200 dark:contrast-100">
+                {/* First set of logos */}
+                <div className="flex items-center gap-10 md:gap-16 px-8">
+                  <i className="fab fa-google text-3xl hover:text-[#4285F4] transition-colors cursor-pointer" title="Google"></i>
+                  <i className="fab fa-microsoft text-3xl hover:text-[#00a4ef] transition-colors cursor-pointer" title="Microsoft"></i>
+                  <i className="fab fa-amazon text-3xl hover:text-[#FF9900] transition-colors cursor-pointer" title="Amazon"></i>
+                  <i className="fab fa-meta text-3xl hover:text-[#0668E1] transition-colors cursor-pointer" title="Meta"></i>
+                  <i className="fab fa-apple text-3xl hover:text-[#000000] dark:hover:text-white transition-colors cursor-pointer" title="Apple"></i>
+                  <i className="fab fa-spotify text-3xl hover:text-[#1DB954] transition-colors cursor-pointer" title="Spotify"></i>
+                  <i className="fab fa-linkedin text-3xl hover:text-[#0A66C2] transition-colors cursor-pointer" title="LinkedIn"></i>
+                  <i className="fab fa-uber text-3xl hover:text-[#000000] dark:hover:text-white transition-colors cursor-pointer" title="Uber"></i>
+                  <i className="fab fa-adobe text-3xl hover:text-[#FF0000] transition-colors cursor-pointer" title="Adobe"></i>
+                  <span className="text-2xl font-bold hover:text-[#E82127] transition-colors cursor-pointer" title="Netflix">N</span>
+                  <span className="text-2xl font-bold hover:text-[#CC0000] transition-colors cursor-pointer" title="Tesla">T</span>
+                  <span className="text-2xl font-bold hover:text-[#EA4335] transition-colors cursor-pointer" title="Oracle">O</span>
+                  <span className="text-2xl font-bold hover:text-[#00A1E0] transition-colors cursor-pointer" title="Salesforce">S</span>
+                  <span className="text-2xl font-bold hover:text-[#0530AD] transition-colors cursor-pointer" title="IBM">IBM</span>
+                  <span className="text-2xl font-bold hover:text-[#0071C5] transition-colors cursor-pointer" title="Intel">Intel</span>
+                  <span className="text-2xl font-bold hover:text-[#76B900] transition-colors cursor-pointer" title="Nvidia">Nvidia</span>
+                </div>
+                {/* Duplicate set for seamless infinite loop */}
+                <div className="flex items-center gap-10 md:gap-16 px-8">
+                  <i className="fab fa-google text-3xl hover:text-[#4285F4] transition-colors cursor-pointer" title="Google"></i>
+                  <i className="fab fa-microsoft text-3xl hover:text-[#00a4ef] transition-colors cursor-pointer" title="Microsoft"></i>
+                  <i className="fab fa-amazon text-3xl hover:text-[#FF9900] transition-colors cursor-pointer" title="Amazon"></i>
+                  <i className="fab fa-meta text-3xl hover:text-[#0668E1] transition-colors cursor-pointer" title="Meta"></i>
+                  <i className="fab fa-apple text-3xl hover:text-[#000000] dark:hover:text-white transition-colors cursor-pointer" title="Apple"></i>
+                  <i className="fab fa-spotify text-3xl hover:text-[#1DB954] transition-colors cursor-pointer" title="Spotify"></i>
+                  <i className="fab fa-linkedin text-3xl hover:text-[#0A66C2] transition-colors cursor-pointer" title="LinkedIn"></i>
+                  <i className="fab fa-uber text-3xl hover:text-[#000000] dark:hover:text-white transition-colors cursor-pointer" title="Uber"></i>
+                  <i className="fab fa-adobe text-3xl hover:text-[#FF0000] transition-colors cursor-pointer" title="Adobe"></i>
+                  <span className="text-2xl font-bold hover:text-[#E82127] transition-colors cursor-pointer" title="Netflix">N</span>
+                  <span className="text-2xl font-bold hover:text-[#CC0000] transition-colors cursor-pointer" title="Tesla">T</span>
+                  <span className="text-2xl font-bold hover:text-[#EA4335] transition-colors cursor-pointer" title="Oracle">O</span>
+                  <span className="text-2xl font-bold hover:text-[#00A1E0] transition-colors cursor-pointer" title="Salesforce">S</span>
+                  <span className="text-2xl font-bold hover:text-[#0530AD] transition-colors cursor-pointer" title="IBM">IBM</span>
+                  <span className="text-2xl font-bold hover:text-[#0071C5] transition-colors cursor-pointer" title="Intel">Intel</span>
+                  <span className="text-2xl font-bold hover:text-[#76B900] transition-colors cursor-pointer" title="Nvidia">Nvidia</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Video Modal */}
+      <AnimatePresence>
+        {isVideoOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6"
+          >
+            <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setIsVideoOpen(false)} />
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              className="relative w-full max-w-5xl aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl border border-white/10"
+            >
+              <button 
+                onClick={() => setIsVideoOpen(false)}
+                className="absolute top-4 right-4 z-10 p-2 bg-black/50 hover:bg-black/70 text-white rounded-full transition-colors"
+              >
+                <X size={24} />
+              </button>
+              <iframe 
+                width="100%" 
+                height="100%" 
+                src="https://www.youtube.com/embed/9UhI3l23OLg?si=b5KLgy1KogAWePx8&autoplay=1" 
+                title="YouTube video player" 
+                frameBorder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerPolicy="strict-origin-when-cross-origin" 
+                allowFullScreen
+              ></iframe>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
-  </div>
-);
+  );
+};
 
 const WhoItsFor: React.FC = () => {
   const features = [
