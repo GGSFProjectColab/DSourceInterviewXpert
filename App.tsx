@@ -35,6 +35,7 @@ import TestResults from './pages/TestResults';
 import CandidateTests from './pages/CandidateTests';
 import ContactUs from './pages/ContactUs';
 import ReportBug from './pages/ReportBug';
+import Dscource from './pages/Dscource';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode; role?: 'recruiter' | 'candidate' | 'admin' }> = ({ children, role }) => {
   const { user, userProfile, loading } = useAuth();
@@ -210,6 +211,9 @@ const App: React.FC = () => {
                   } />
                   <Route path="/candidate/tests" element={
                     <ProtectedRoute role="candidate"><CandidateTests /></ProtectedRoute>
+                  } />
+                  <Route path="/candidate/dscource" element={
+                    <ProtectedRoute role="candidate"><Dscource /></ProtectedRoute>
                   } />
 
                   {/* Shared/Public */}

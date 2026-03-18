@@ -113,6 +113,9 @@ const LayoutContent: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                         NEW
                       </span>
                     </Link>
+                    <Link to="/candidate/dscource" className={`px-3 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-300 ${isActive('/candidate/dscource') ? 'bg-white dark:bg-white/10 text-gray-900 dark:text-white shadow-sm' : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-white/5'}`}>
+                      Dscource
+                    </Link>
                   </>
                 ) : (
                   <Link to="/" className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 ${isActive('/') ? 'bg-white dark:bg-white/10 text-gray-900 dark:text-white shadow-sm' : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-white/5'}`}>
@@ -313,6 +316,7 @@ const LayoutContent: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                     <Link to="/candidate/mock-interview" onClick={() => setIsMobileMenuOpen(false)} className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium ${isActive('/candidate/mock-interview') ? 'bg-primary/10 text-primary' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white'}`}><i className="fas fa-robot w-5 text-center"></i> Mock Interview</Link>
                     <Link to="/candidate/tests" onClick={() => setIsMobileMenuOpen(false)} className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium ${isActive('/candidate/tests') ? 'bg-primary/10 text-primary' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white'}`}><i className="fas fa-clipboard-check w-5 text-center"></i> Assessments</Link>
                     <Link to="/candidate/ai-agent" onClick={() => setIsMobileMenuOpen(false)} className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium ${isActive('/candidate/ai-agent') ? 'bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-lg' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white'}`}><i className="fas fa-robot w-5 text-center"></i> Career Copilot</Link>
+                    <Link to="/candidate/dscource" onClick={() => setIsMobileMenuOpen(false)} className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium ${isActive('/candidate/dscource') ? 'bg-primary/10 text-primary' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white'}`}><i className="fas fa-book w-5 text-center"></i> Dscource</Link>
                   </>
                 ) : (
                   <>
